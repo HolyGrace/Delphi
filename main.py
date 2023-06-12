@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.get("/")
 def index():
-    return "Hello Worlds"
+    return {"msg": "Bienvenido al sistema de recomendación Delphi"}
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes:str):
@@ -29,7 +29,9 @@ def cantidad_filmaciones_mes(mes:str):
     }
     
     mes = mes.lower().strip()
-
+    
+    # Returns the value that matches the month in the dictionary
+    # If none match, returns None
     month_in_English = months.get(mes, None)
     if month_in_English is None:
         return {'mes':mes, 'cantidad': 'El nombre del mes ingresado no es valido'}
@@ -92,11 +94,14 @@ def votos_titulo(titulo:str):
 def get_actor(nombre_actor:str):
     '''Se ingresa el nombre de un actor que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno. 
     Además, la cantidad de películas que en las que ha participado y el promedio de retorno'''
+    # Filter the "credits" dataframe to obtain all the movies in which the actor has participated
     actor_movies = credits[credits['cast'].apply(lambda x: any(dict['name'] == nombre_actor for dict in x))]
     if actor_movies.empty:
         return {'msg': 'No se ha encontrado el actor ingresado'}
     else:
+        # Gets the ids of the movies in which the actor has participate
         actor_movie_ids = actor_movies['id']
+        # Filter the "movies_data" dataset according to the previously obtained ids
         actor_movies_data = movies_data[movies_data['id'].isin(actor_movie_ids)]
         num_movies_participated = actor_movies_data.shape[0]
         actor_total_return = actor_movies_data['return'].sum()
@@ -119,6 +124,7 @@ def get_director(nombre_director: str):
         director_movies_data = movies_data[movies_data['id'].isin(director_movie_ids)]
 
         director_movies_info = []
+        # Traverses the rows of the dataframe taking only the data (of type series)
         for _, movie in director_movies_data.iterrows():
             movie_info = {
                 'titulo': str(movie['title']),
@@ -142,9 +148,12 @@ def recomendacion(titulo:str):
     if movie.empty:
         return {'msg': 'No se ha encontrado ninguna pelicula que coincida con el titulo ingresado'}
     else:
+        # Get the index of the movie
         movie_index = movie.index[0]
-        print("El indice es:", movie_index)
+        # Calculate the average similarity of votes for all movies
         similarity_scores = cosine_similarity(movies_data[['vote_average']])
+        # Get indexes of similar movies
         similar_indexes = similarity_scores[movie_index].argsort()[::-1][1:6]
+        # From the indexes, obtain the titles of similar movies
         similar_movies = movies_data.loc[similar_indexes, 'title'].tolist()
         return {'lista recomendada': similar_movies}
