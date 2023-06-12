@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from etl import movies_data, credits
 from fastapi import FastAPI
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = FastAPI()
 
@@ -133,3 +134,17 @@ def get_director(nombre_director: str):
                 'retorno_total_director': int(director_movies_data['return'].sum()),
                 'peliculas': director_movies_info
                 }
+
+@app.get('/recomendacion/{titulo}')
+def recomendacion(titulo:str):
+    '''Ingresas un nombre de pelicula y te recomienda las similares en una lista'''
+    movie = movies_data[movies_data['title'] == titulo]
+    if movie.empty:
+        return {'msg': 'No se ha encontrado ninguna pelicula que coincida con el titulo ingresado'}
+    else:
+        movie_index = movie.index[0]
+        print("El indice es:", movie_index)
+        similarity_scores = cosine_similarity(movies_data[['vote_average']])
+        similar_indexes = similarity_scores[movie_index].argsort()[::-1][1:6]
+        similar_movies = movies_data.loc[similar_indexes, 'title'].tolist()
+        return {'lista recomendada': similar_movies}
