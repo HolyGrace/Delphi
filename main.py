@@ -121,7 +121,7 @@ def get_director(nombre_director: str):
         for _, movie in director_movies_data.iterrows():
             movie_info = {
                 'titulo': str(movie['title']),
-                'anio': int(movie['release_year']),
+                'fecha_lanzamiento': str(movie['release_date'].date()),
                 'retorno_pelicula': float(movie['return']),
                 'budget_pelicula': int(movie['budget']),
                 'revenue_pelicula': int(movie['revenue'])
