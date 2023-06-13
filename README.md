@@ -1,6 +1,6 @@
 # Delphi
 
-![vista frontal del cine](src\joel-muniz-IkSjU7Ij2xk-unsplash.jpg)
+![vista frontal del cine](https://github.com/HolyGrace/Delphi/blob/master/src/joel-muniz-IkSjU7Ij2xk-unsplash.jpg)
 
 **Delphi** es un sistema de recomendación de películas que utiliza técnicas de filtrado colaborativo para recomendar películas a los usuarios 🎬🍿. También proporciona funciones de consulta a los conjuntos de datos utilizados en el sistema.
 
