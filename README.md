@@ -49,4 +49,11 @@ Para utilizar el sistema de recomendación y las funciones de consulta, se requi
 
 4. Utilice las funciones de consulta provistas para obtener información detallada sobre las películas, explorar datos relacionados con las filmaciones, obtener puntajes y votos de películas específicas, buscar información sobre actores y directores, y recibir recomendaciones personalizadas.
 
+    
+    Para utilizar la API localmente, navegue hasta la ubicación del archivo ``main.py`` en su directorio. A continuación, ejecute el siguiente comando en la terminal:
+
+    ```
+    $ uvicorn main:app --reload
+    ```
+
 Esperamos que este sistema de recomendación de películas y las funciones de consulta a los conjuntos de datos sean útiles para explorar y descubrir películas según las preferencias y calificaciones de los usuarios. ¡Disfruta de tus películas recomendadas! ✨🌠
