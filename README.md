@@ -1,8 +1,8 @@
 # Delphi
 
-<img src="https://source.unsplash.com/IkSjU7Ij2xk" style="width:1000px; height:100px; object-fit: cover;">
+![vista frontal del cine](src\joel-muniz-IkSjU7Ij2xk-unsplash.jpg)
 
-Delphi es un sistema de recomendación de películas que utiliza técnicas de filtrado colaborativo para recomendar películas a los usuarios 🎬🍿. También proporciona funciones de consulta a los conjuntos de datos utilizados en el sistema.
+**Delphi** es un sistema de recomendación de películas que utiliza técnicas de filtrado colaborativo para recomendar películas a los usuarios 🎬🍿. También proporciona funciones de consulta a los conjuntos de datos utilizados en el sistema.
 
 ## Conjuntos de Datos Disponibles
 1. ``movies.csv``: Este archivo contiene información sobre las películas disponibles en el sistema de recomendación 🎟️. Incluye detalles como el título, género y descripción de cada película.
